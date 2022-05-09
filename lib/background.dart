@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ghuraghuri/home.dart';
+import 'package:ghuraghuri/profile.dart';
 import 'package:ghuraghuri/search.dart';
 
 import 'logout.dart';
@@ -14,7 +16,9 @@ class BackGroundPage extends StatefulWidget {
 class _BackGroundPageState extends State<BackGroundPage> {
   int currentindex=0;
   final screens = [
+    Home(),
     Search(),
+    Profile(),
     Log_Out()
   ];
 
@@ -33,8 +37,18 @@ class _BackGroundPageState extends State<BackGroundPage> {
         }),
         items:  const [
           BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+            //backgroundColor: Colors.deepPurple,
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: "Search",
+            //backgroundColor: Colors.deepPurple,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: "Profile",
             //backgroundColor: Colors.deepPurple,
           ),
           BottomNavigationBarItem(
