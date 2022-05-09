@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "719299972728",
+    "project_id": "ghuraghuri-b6913",
+    "storage_bucket": "ghuraghuri-b6913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719299972728:android:fb7e2ba10d111797eca78d",
+        "android_client_info": {
+          "package_name": "com.example.ghuraghuri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719299972728-mhbmut634cktha6005u0b3458jhur8jm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuseYNHrzmb0oHjkeuRnSoFB4AIQKrNWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719299972728-mhbmut634cktha6005u0b3458jhur8jm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
