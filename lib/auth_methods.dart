@@ -96,5 +96,19 @@ Future<void> storeUserData(String name, String mail, String pass, String phone)a
   return;
 }
 
+Future<void> storeArticle(String title, String desc, int like, int dislike, String url) async {
+  CollectionReference article = FirebaseFirestore.instance.collection('Article');
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String uid = firebaseAuth.currentUser!.uid.toString();
+  article.add({
+    'Title': title,
+    'Description': desc,
+    'Uid': uid,
+    'Url': url,
+    'Like': like,
+    'Dislike': dislike});
+  return;
+}
+
 
 
