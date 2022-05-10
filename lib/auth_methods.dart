@@ -102,7 +102,9 @@ Future<void> storeArticle(String title, String desc, int like, int dislike, Stri
   CollectionReference article = FirebaseFirestore.instance.collection('Article');
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String uid = firebaseAuth.currentUser!.uid.toString();
+  DocumentReference docs= article.doc();
   article.add({
+    'ID': docs.id,
     'Title': title,
     'Description': desc,
     'Uid': uid,
@@ -112,7 +114,3 @@ Future<void> storeArticle(String title, String desc, int like, int dislike, Stri
   return;
 }
 
-/*Future<ModelUser> getUserById(String uid) async{
-  final ref = FirebaseFirestore.instance.collection('Users').doc(uid).get().then((value) => return value);
-
-}*/

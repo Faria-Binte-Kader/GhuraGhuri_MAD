@@ -1,4 +1,5 @@
 class ModelArticle{
+  String id;
   String title;
   int like;
   int dislike;
@@ -6,6 +7,6 @@ class ModelArticle{
   String url;
   String uid;
 
-  ModelArticle(this.title,this.description,this.like, this.dislike, this.url, this.uid);
+  ModelArticle(this.title,this.description,this.like, this.dislike, this.url, this.uid, this.id);
 
 }

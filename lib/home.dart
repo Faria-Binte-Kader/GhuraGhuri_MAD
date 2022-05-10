@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   List<ModelArticle> articleList = [];
 
   fetchArticleList() async {
-    String title, desc, url, uid;
+    String title, desc, url, uid, id;
     int like, dislike;
 
     FirebaseFirestore.instance.collection('Article').get()
@@ -44,8 +44,9 @@ class _HomeState extends State<Home> {
         like=products["Like"];
         dislike=products["Dislike"];
         uid=products["Uid"];
+        id=products["ID"];
         setState(() {
-          articleList.add(ModelArticle(title,  desc, like, dislike, url, uid));
+          articleList.add(ModelArticle(title,  desc, like, dislike, url, uid, id));
         });
       });
     });
@@ -216,9 +217,10 @@ class _HomeState extends State<Home> {
                     String url= articleList[i].url;
                     int like= articleList[i].like;
                     int dislike= articleList[i].dislike;
+                    String id = articleList[i].id;
                      Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) =>  ArticleDetails(title: title, description: description, like: like, dislike: dislike, url: url, uid: uid)));},
+                        MaterialPageRoute(builder: (context) =>  ArticleDetails(title: title, description: description, like: like, dislike: dislike, url: url, uid: uid, id: id)));},
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
