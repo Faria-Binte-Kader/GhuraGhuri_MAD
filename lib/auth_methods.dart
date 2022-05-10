@@ -102,8 +102,8 @@ Future<void> storeArticle(String title, String desc, int like, int dislike, Stri
   CollectionReference article = FirebaseFirestore.instance.collection('Article');
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String uid = firebaseAuth.currentUser!.uid.toString();
-  DocumentReference docs= article.doc();
-  article.add({
+  DocumentReference docs= FirebaseFirestore.instance.collection('Article').doc();
+  article.doc(docs.id).set({
     'ID': docs.id,
     'Title': title,
     'Description': desc,
@@ -111,6 +111,18 @@ Future<void> storeArticle(String title, String desc, int like, int dislike, Stri
     'Url': url,
     'Like': like,
     'Dislike': dislike});
+  return;
+}
+
+Future<void> storePlan(String title, String desc) async {
+  CollectionReference plans = FirebaseFirestore.instance.collection('Plans');
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String uid = firebaseAuth.currentUser!.uid.toString();
+  DocumentReference docs= plans.doc();
+  plans.add({
+    'Title': title,
+    'Description': desc,
+    'Uid': uid});
   return;
 }
 
