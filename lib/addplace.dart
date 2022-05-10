@@ -132,9 +132,14 @@ class _AddPlaceState extends State<AddPlace> {
         markerId: const MarkerId('newMarker'),
         infoWindow: const InfoWindow(title: 'this is the new marker'),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-        position: pos
+        position: pos,
+        onTap: _makeDialogueBox
       );
       MarkerList.add(_newMarker);
     });
+  }
+
+  void _makeDialogueBox(){
+
   }
 }

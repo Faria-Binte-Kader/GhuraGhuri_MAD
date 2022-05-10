@@ -206,7 +206,8 @@ class _LocationDetailsState extends State<LocationDetails> {
         },
         // tooltip: 'Increment',
         child: isPressed? const Icon(Icons.backspace_outlined): const Icon(Icons.location_searching),
-      )
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
 }
