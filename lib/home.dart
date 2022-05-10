@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghuraghuri/ModelArticle.dart';
 import 'package:ghuraghuri/addplace.dart';
+import 'package:ghuraghuri/articleDetails.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -31,7 +32,7 @@ class _HomeState extends State<Home> {
   List<ModelArticle> articleList = [];
 
   fetchArticleList() async {
-    String title, desc, url;
+    String title, desc, url, uid;
     int like, dislike;
 
     FirebaseFirestore.instance.collection('Article').get()
@@ -42,8 +43,9 @@ class _HomeState extends State<Home> {
         url=products["Url"];
         like=products["Like"];
         dislike=products["Dislike"];
+        uid=products["Uid"];
         setState(() {
-          articleList.add(ModelArticle(title,  desc, like, dislike, url));
+          articleList.add(ModelArticle(title,  desc, like, dislike, url, uid));
         });
       });
     });
@@ -209,9 +211,14 @@ class _HomeState extends State<Home> {
                 child: GestureDetector(
                   onTap: (){
                     String title= articleList[i].title;
-                   /* Navigator.push(
+                    String description= articleList[i].description;
+                    String uid= articleList[i].uid;
+                    String url= articleList[i].url;
+                    int like= articleList[i].like;
+                    int dislike= articleList[i].dislike;
+                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) =>  ProductDetails(name: name, quantity: q, desc: des, url: u, price: pr)));*/},
+                        MaterialPageRoute(builder: (context) =>  ArticleDetails(title: title, description: description, like: like, dislike: dislike, url: url, uid: uid)));},
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

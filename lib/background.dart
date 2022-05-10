@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ghuraghuri/home.dart';
+import 'package:ghuraghuri/plan.dart';
 import 'package:ghuraghuri/profile.dart';
 import 'package:ghuraghuri/search.dart';
 
@@ -18,8 +19,8 @@ class _BackGroundPageState extends State<BackGroundPage> {
   final screens = [
     Home(),
     Search(),
-    Profile(),
-    Log_Out()
+    Plan(),
+    Profile()
   ];
 
   @override
@@ -47,13 +48,13 @@ class _BackGroundPageState extends State<BackGroundPage> {
             //backgroundColor: Colors.deepPurple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "Profile",
+            icon: Icon(Icons.post_add),
+            label: "Plan",
             //backgroundColor: Colors.deepPurple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout),
-            label: "Log out",
+            icon: Icon(Icons.account_circle),
+            label: "Profile",
             //backgroundColor: Colors.deepPurple,
           ),
         ],

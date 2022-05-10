@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'ModelUser.dart';
+
 Future<User?> createAccount(String name, String mail, String pass, String phone) async{
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   try{
@@ -110,5 +112,7 @@ Future<void> storeArticle(String title, String desc, int like, int dislike, Stri
   return;
 }
 
+/*Future<ModelUser> getUserById(String uid) async{
+  final ref = FirebaseFirestore.instance.collection('Users').doc(uid).get().then((value) => return value);
 
-
+}*/
