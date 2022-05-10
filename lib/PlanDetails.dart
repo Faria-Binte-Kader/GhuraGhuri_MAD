@@ -1,16 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'PlanLocations.dart';
 
 class PlanDetails extends StatefulWidget {
-  const PlanDetails({Key? key, String? this.title, String? this.description, this.uid,}) : super(key: key);
-  final String? title,description,uid;
+  const PlanDetails({Key? key, String? this.title, String? this.description, String? this.uid, String? this.id}) : super(key: key);
+  final String? title,description,uid,id;
 
   @override
   _PlanDetailsState createState() => _PlanDetailsState();
 }
 
 class _PlanDetailsState extends State<PlanDetails> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +72,37 @@ class _PlanDetailsState extends State<PlanDetails> {
                     ],
                   ),
                 ),
+              ),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                        //String? id = widget.id;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PlanLocations(id: widget.id)));
+                    },
+                    child: const Text(
+                      'Add Location',
+                      style: TextStyle(
+                          color: Colors.deepPurpleAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  )
+                ],
               ),
             ],
           ),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'ModelLocation.dart';
 import 'ModelUser.dart';
 
 Future<User?> createAccount(String name, String mail, String pass, String phone) async{
@@ -119,10 +120,24 @@ Future<void> storePlan(String title, String desc) async {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String uid = firebaseAuth.currentUser!.uid.toString();
   DocumentReference docs= plans.doc();
-  plans.add({
+  plans.doc(docs.id).set({
     'Title': title,
     'Description': desc,
-    'Uid': uid});
+    'Uid': uid,
+    'ID': docs.id,});
+  return;
+}
+
+Future<void> storePlanLocation(String? name, String? desc, String? planid) async {
+  CollectionReference planlocation = FirebaseFirestore.instance.collection('PlanLocation');
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String uid = firebaseAuth.currentUser!.uid.toString();
+  DocumentReference docs= planlocation.doc();
+  planlocation.add({
+    'Name': name,
+    'Description': desc,
+    'Uid': uid,
+    'Planid': planid});
   return;
 }
 

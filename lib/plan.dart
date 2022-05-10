@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,18 +20,20 @@ class _PlanState extends State<Plan> {
   List<ModelPlan> planList = [];
 
   fetchPlanList() async {
-    String title, desc, uid;
+    String title, desc, uid, id;
 
     FirebaseFirestore.instance
         .collection('Plans')
+        .where("Uid", isEqualTo: FirebaseAuth.instance.currentUser?.uid)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((plan) {
         title = plan["Title"];
         desc = plan["Description"];
         uid = plan["Uid"];
+        id = plan["ID"];
         setState(() {
-          planList.add(ModelPlan(title, desc, uid));
+          planList.add(ModelPlan(title, desc, uid, id));
         });
       });
     });
@@ -168,6 +171,7 @@ class _PlanState extends State<Plan> {
                             String title = planList[i].title;
                             String description = planList[i].description;
                             String uid = planList[i].uid;
+                            String id = planList[i].id;
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
