@@ -9,6 +9,8 @@ import 'package:ghuraghuri/ModelLocation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 
 class AddPlace extends StatefulWidget {
@@ -83,7 +85,7 @@ class _AddPlaceState extends State<AddPlace> {
         rating=products["Rating"];
         type=products["Type"];
         setState(() {
-          LatLng pos = new LatLng(double.parse(latitude), double.parse(longitude));
+          LatLng pos = LatLng(double.parse(latitude), double.parse(longitude));
           locationList.add(Modellocation(locationName,  description, url, latitude, longitude, rating, type));
           MarkerList.add(Marker(
               markerId: MarkerId(locationName),
@@ -97,11 +99,11 @@ class _AddPlaceState extends State<AddPlace> {
     });
   }
 
-
   @override
   initState()  {
     // TODO: implement initState
     fetchLocationList();
+    // _determinePosition();
     super.initState();
   }
 
@@ -113,9 +115,9 @@ class _AddPlaceState extends State<AddPlace> {
 
   Widget _buildPopupDialog(BuildContext context) {
     return StatefulBuilder(
-        builder: (context, setState) {return new AlertDialog(
+        builder: (context, setState) {return AlertDialog(
       title: const Text('Add location'),
-      content: new Column(
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -126,7 +128,7 @@ class _AddPlaceState extends State<AddPlace> {
               textInputAction: TextInputAction.newline,
               minLines: 1,
               maxLines: 2,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Title',
                 hintStyle: TextStyle(fontSize: 18),
               ),
@@ -194,7 +196,7 @@ class _AddPlaceState extends State<AddPlace> {
         ],
       ),
       actions: <Widget>[
-        new GestureDetector(
+        GestureDetector(
           onTap:  () {
             if(load==true){
               uploadLocationToFirebase(context);
@@ -222,7 +224,7 @@ class _AddPlaceState extends State<AddPlace> {
                 fontSize: 18
             ),),),
         const SizedBox(width: 120,),
-        new TextButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -259,7 +261,6 @@ class _AddPlaceState extends State<AddPlace> {
     );
   }
 
-
   void _createMarker(LatLng pos){
     setState(() {
       newlat= pos.latitude.toString();
@@ -279,5 +280,4 @@ class _AddPlaceState extends State<AddPlace> {
       MarkerList.add(_newMarker);
     });
   }
-
 }
