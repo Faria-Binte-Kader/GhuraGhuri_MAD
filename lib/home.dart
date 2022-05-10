@@ -69,7 +69,6 @@ class _HomeState extends State<Home> {
       _image=File(pickedFile!.path);
       load=true;
     });
-
   }
 
   Future uploadImageToFirebase(BuildContext context) async {

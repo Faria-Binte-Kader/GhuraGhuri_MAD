@@ -115,6 +115,23 @@ Future<void> storeArticle(String title, String desc, int like, int dislike, Stri
   return;
 }
 
+Future<void> storeLocation(String title, String desc, String lat, String lng, String url, String rat) async {
+  CollectionReference article = FirebaseFirestore.instance.collection('Locations');
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String uid = firebaseAuth.currentUser!.uid.toString();
+  DocumentReference docs= FirebaseFirestore.instance.collection('Locations').doc();
+  article.doc(docs.id).set({
+    'Type': "",
+    'Rating': rat,
+    'Name': title,
+    'Description': desc,
+    'Uid': uid,
+    'Imageurl': url,
+    'Latitude': lat,
+    'Longitude': lng});
+  return;
+}
+
 Future<void> storePlan(String title, String desc) async {
   CollectionReference plans = FirebaseFirestore.instance.collection('Plans');
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
