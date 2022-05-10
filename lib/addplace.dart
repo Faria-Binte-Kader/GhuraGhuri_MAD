@@ -22,6 +22,7 @@ class _AddPlaceState extends State<AddPlace> {
   List<Modellocation> locationList = [];
   List<Marker> MarkerList = [];
   List<Marker> markerss = [];
+  late Marker _newMarker;
 
   late String  latitude='', longitude='';
 
@@ -47,11 +48,7 @@ class _AddPlaceState extends State<AddPlace> {
               position: pos,
               icon: BitmapDescriptor.defaultMarker
           ));
-
         });
-        dev.log('$LatLng',
-          name: 'latlang'
-        );
       });
     });
   }
@@ -109,7 +106,7 @@ class _AddPlaceState extends State<AddPlace> {
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
-              // onLongPress: _createMarker,
+              onLongPress: _createMarker,
             ),
           ),
         ],
@@ -126,5 +123,17 @@ class _AddPlaceState extends State<AddPlace> {
   Future<void> _goTo() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
+
+  void _createMarker(LatLng pos){
+    setState(() {
+      _newMarker = Marker(
+        markerId: const MarkerId('newMarker'),
+        infoWindow: const InfoWindow(title: 'this is the new marker'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+        position: pos
+      );
+      MarkerList.add(_newMarker);
+    });
   }
 }
