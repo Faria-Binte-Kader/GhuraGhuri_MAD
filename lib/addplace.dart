@@ -47,7 +47,9 @@ class _AddPlaceState extends State<AddPlace> {
               icon: BitmapDescriptor.defaultMarker
           ));
         });
-        print('------------------------------------------ $products');
+        dev.log('$LatLng',
+          name: 'latlang'
+        );
       });
     });
   }

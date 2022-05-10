@@ -8,6 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'addplace.dart';
+
 class LocationDetails extends StatefulWidget {
   LocationDetails({Key? key, String? this.name, String? this.desc, String? this.url, String? this.latitude, String? this.longitude, String? this.rating, String? this.type}) : super(key: key);
   final String? name,desc,url,latitude,longitude,rating,type;
@@ -144,7 +146,17 @@ class _LocationDetailsState extends State<LocationDetails> {
               ),
             ],
           ),
-        )
+        ),
+        floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.deepPurple,
+        onPressed: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddPlace()));
+        },
+        // tooltip: 'Increment',
+        child: const Icon(Icons.add_location),
+      )
     );
   }
 }
