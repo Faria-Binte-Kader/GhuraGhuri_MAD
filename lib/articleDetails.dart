@@ -157,7 +157,9 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                     ),),
                                   const SizedBox(width: 30,),
                                   GestureDetector(
-                                    onTap:  () {},
+                                    onTap:  () {
+                                      increaseDislike();
+                                    },
                                     child: const Icon(Icons.thumb_down_alt_rounded, color:Colors.white ),
                                   ),
                                   const SizedBox(width: 10,),

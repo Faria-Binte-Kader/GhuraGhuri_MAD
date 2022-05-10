@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ghuraghuri/ModelMarker';
 import 'package:ghuraghuri/ModelLocation.dart';
@@ -27,7 +28,7 @@ class _AddPlaceState extends State<AddPlace> {
   fetchLocationList() async {
     String locationName, description, url, rating, type;
 
-    FirebaseFirestore.instance.collection('Location').get()
+    FirebaseFirestore.instance.collection('Locations').get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((products) {
         locationName=products["Name"];
@@ -46,6 +47,7 @@ class _AddPlaceState extends State<AddPlace> {
               position: pos,
               icon: BitmapDescriptor.defaultMarker
           ));
+
         });
         dev.log('$LatLng',
           name: 'latlang'
@@ -71,8 +73,8 @@ class _AddPlaceState extends State<AddPlace> {
   initState()  {
     // TODO: implement initState
     initialize();
-    super.initState();
     fetchLocationList();
+    super.initState();
   }
 
   static const CameraPosition _kGooglePlex =  CameraPosition(
@@ -95,16 +97,22 @@ class _AddPlaceState extends State<AddPlace> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        myLocationEnabled: true,
-        zoomControlsEnabled: false,
-        mapType: MapType.normal,
-        markers: markerss.map((e) => e).toSet(),
-        initialCameraPosition: _kLake,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        // onLongPress: _createMarker,
+      body: Column(
+        children: [
+          Expanded(
+            child: GoogleMap(
+              myLocationEnabled: true,
+              zoomControlsEnabled: false,
+              mapType: MapType.normal,
+              markers: MarkerList.map((e) => e).toSet(),
+              initialCameraPosition: _kLake,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              // onLongPress: _createMarker,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goTo,
