@@ -44,7 +44,8 @@ class _AddPlaceState extends State<AddPlace> {
           locationList.add(Modellocation(locationName,  description, url, latitude, longitude, rating, type));
           MarkerList.add(Marker(
               markerId: MarkerId(locationName),
-              infoWindow: InfoWindow(title: description),
+              infoWindow: InfoWindow(title: locationName,
+              ),
               position: pos,
               icon: BitmapDescriptor.defaultMarker
           ));
