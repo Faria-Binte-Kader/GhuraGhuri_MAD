@@ -1,0 +1,5 @@
+class Latlng{
+  double latitude, longitude;
+
+  Latlng(this.latitude, this.longitude);
+}

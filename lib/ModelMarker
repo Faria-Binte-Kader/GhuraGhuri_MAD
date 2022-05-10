@@ -1,0 +1,8 @@
+import 'package:ghuraghuri/Latlng';
+
+class ModelMarker{
+  String id;
+  Latlng position;
+
+  ModelMarker(this.id, this.position);
+}
