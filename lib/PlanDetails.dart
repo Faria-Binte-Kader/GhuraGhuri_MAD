@@ -34,15 +34,23 @@ class _PlanDetailsState extends State<PlanDetails> {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((planlocation) {
-        title = planlocation["Title"];
+        title = planlocation["Name"];
         desc = planlocation["Description"];
         uid = planlocation["Uid"];
-        id = planlocation["ID"];
+        id = planlocation["Planid"];
         setState(() {
+          print("The location message is: $title");
           _resultsList.add(Modellocation(title, desc, "", "", "", "", ""));
         });
       });
     });
+  }
+
+  @override
+  initState() {
+    // TODO: implement initState
+    fetchPlanLocationList();
+    super.initState();
   }
 
   @override
@@ -138,50 +146,48 @@ class _PlanDetailsState extends State<PlanDetails> {
                           fontSize: 18),
                     ),
                   ),
-                  Container(
-                    child: ListView.builder(
-                      itemCount: _resultsList.length,
-                      itemBuilder: (context, index) => Card(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                  child: RichText(
-                                    overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15),
-                                        text: _resultsList[index].locationName ?? ""),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                  child: RichText(
-                                    overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15),
-                                        text: _resultsList[index].description ?? ""),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 20, 5, 0),
+                height: 100,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                 scrollDirection: Axis.horizontal,
+                  itemCount: _resultsList.length,
+                  itemBuilder: (context, index) => Card(
+                      child: Container(
+                        width: 200,
+                        child: Card(
+                            child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        //mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: RichText(
+                              overflow: TextOverflow.ellipsis,
+                              text: TextSpan(
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                  text: _resultsList[index].locationName ?? ""),
+                            ),
+                          ),
+                          Flexible(
+                            child: RichText(
+                              overflow: TextOverflow.ellipsis,
+                              text: TextSpan(
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                  text: _resultsList[index].description ?? ""),
+                            ),
+                          ),
+                        ],
+                    ),
+                  )),
+                      )),
+                ),
               ),
             ],
           ),
