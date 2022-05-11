@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -172,13 +174,15 @@ class _PlanState extends State<Plan> {
                             String description = planList[i].description;
                             String uid = planList[i].uid;
                             String id = planList[i].id;
+                            log('pid: $id');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => PlanDetails(
                                         title: title,
                                         description: description,
-                                        uid: uid)));
+                                        uid: uid,
+                                        id: id)));
                           },
                           child: Card(
                             child: Padding(

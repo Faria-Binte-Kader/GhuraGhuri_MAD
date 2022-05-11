@@ -7,10 +7,11 @@ import 'package:ghuraghuri/auth_methods.dart';
 import 'package:ghuraghuri/plan.dart';
 import 'LocationDeatils.dart';
 import 'ModelLocation.dart';
+import 'PlanDetails.dart';
 
 class PlanLocations extends StatefulWidget {
-  const PlanLocations({Key? key, this.id}) : super(key: key);
-  final String? id;
+  const PlanLocations({Key? key, String? this.title, String? this.description, String? this.uid, String? this.id}) : super(key: key);
+  final String? title,description,uid,id;
 
   @override
   _PlanLocationsState createState() => _PlanLocationsState();
@@ -149,8 +150,11 @@ class _PlanLocationsState extends State<PlanLocations> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Plan()));
+                                                    builder: (context) => PlanDetails(
+                                                        title: widget.title,
+                                                        description: widget.description,
+                                                        uid: widget.uid,
+                                                        id: widget.id)));
                                           },
                                           child: Icon(Icons.add)),
                                     ],
