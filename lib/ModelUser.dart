@@ -4,6 +4,7 @@ class ModelUser{
   String phone;
   String uid;
 
+
   ModelUser(this.name,this.mail,this.phone, this.uid);
 
 }
