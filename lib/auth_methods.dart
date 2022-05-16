@@ -183,3 +183,14 @@ Future<void> updateEndDate(String? sdate, String? planid) async {
   return;
 }
 
+Future<void> deleteArticle(String articleid) async {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String uid = firebaseAuth.currentUser!.uid.toString();
+
+  FirebaseFirestore.instance
+      .collection('Article')
+      .doc(articleid)
+      .delete();
+  return;
+}
+

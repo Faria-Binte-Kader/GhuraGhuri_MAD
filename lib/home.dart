@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghuraghuri/ModelArticle.dart';
 import 'package:ghuraghuri/ModelLocation.dart';
 import 'package:ghuraghuri/addplace.dart';
+import 'package:ghuraghuri/allarticles.dart';
 import 'package:ghuraghuri/articleDetails.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -335,6 +336,18 @@ class _HomeState extends State<Home> {
                   },
                   itemCount: articleList.length,
                 ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AllArticles()));
+                    },
+                    child: Icon(Icons.keyboard_arrow_down)),
               ),
               Container(
                   margin: const EdgeInsets.fromLTRB(20, 35, 20, 0),

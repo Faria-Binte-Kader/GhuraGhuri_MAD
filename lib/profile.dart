@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ghuraghuri/ModelUser.dart';
 import 'package:ghuraghuri/logout.dart';
+import 'package:ghuraghuri/myarticles.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -156,6 +157,34 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                    height: 50,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(30.0),
+                      shadowColor: Colors.deepPurpleAccent,
+                      color: Colors.deepPurple,
+                      elevation: 8.0,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyArticles()),
+                          );
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'See My Articles',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                     ),
                   ),
