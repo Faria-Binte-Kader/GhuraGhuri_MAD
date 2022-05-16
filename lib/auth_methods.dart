@@ -133,6 +133,8 @@ Future<void> storeLocation(String title, String desc, String lat, String lng, St
 }
 
 Future<void> storePlan(String title, String desc) async {
+  DateTime selectedDate = DateTime.now();
+  String date = selectedDate.toString();
   CollectionReference plans = FirebaseFirestore.instance.collection('Plans');
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String uid = firebaseAuth.currentUser!.uid.toString();
@@ -141,7 +143,10 @@ Future<void> storePlan(String title, String desc) async {
     'Title': title,
     'Description': desc,
     'Uid': uid,
-    'ID': docs.id,});
+    'ID': docs.id,
+    'StartDate': date,
+    'EndDate': date
+     });
   return;
 }
 
@@ -155,6 +160,26 @@ Future<void> storePlanLocation(String? name, String? desc, String? planid) async
     'Description': desc,
     'Uid': uid,
     'Planid': planid});
+  return;
+}
+
+Future<void> updateStartDate(String? sdate, String? planid) async {
+  FirebaseFirestore.instance
+      .collection('Plans')
+      .doc(planid)
+      .update({'StartDate': sdate})
+      .then((value) => print("Starting date Updated"))
+      .catchError((error) => print("Failed to update plan: $error"));
+  return;
+}
+
+Future<void> updateEndDate(String? sdate, String? planid) async {
+  FirebaseFirestore.instance
+      .collection('Plans')
+      .doc(planid)
+      .update({'EndDate': sdate})
+      .then((value) => print("Starting date Updated"))
+      .catchError((error) => print("Failed to update plan: $error"));
   return;
 }
 

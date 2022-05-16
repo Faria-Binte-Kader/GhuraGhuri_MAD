@@ -23,7 +23,8 @@ class _PlanLocationsState extends State<PlanLocations> {
   late Future resultsLoaded;
   List _allResults = [];
   List _resultsList = [];
-  String? name, des, planid;
+  String name='', des='', start='', end='';
+  String? planid;
 
   @override
   void initState() {
@@ -100,7 +101,7 @@ class _PlanLocationsState extends State<PlanLocations> {
               ),
               Container(
                   child: ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: _resultsList.length,
                 itemBuilder: (BuildContext context, int index) =>
@@ -135,6 +136,8 @@ class _PlanLocationsState extends State<PlanLocations> {
                                           onTap: () {
                                             name = _resultsList[index]['Name'];
                                             des = _resultsList[index]['Description'];
+                                            start = _resultsList[index]['StartDate'];
+                                            end = _resultsList[index]['EndDate'];
                                             planid = widget.id;
                                             addPlanLocation(context);
                                             setState(() {
@@ -154,7 +157,9 @@ class _PlanLocationsState extends State<PlanLocations> {
                                                         title: widget.title,
                                                         description: widget.description,
                                                         uid: widget.uid,
-                                                        id: widget.id)));
+                                                        id: widget.id,
+                                                        start: start,
+                                                    end: end,)));
                                           },
                                           child: Icon(Icons.add)),
                                     ],

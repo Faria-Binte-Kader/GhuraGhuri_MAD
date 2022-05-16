@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghuraghuri/ModelLocation.dart';
+import 'package:ghuraghuri/auth_methods.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'PlanLocations.dart';
 
@@ -14,9 +16,12 @@ class PlanDetails extends StatefulWidget {
       String? this.title,
       String? this.description,
       String? this.uid,
-      String? this.id})
+      String? this.id,
+      required this.start,
+      required this.end})
       : super(key: key);
   final String? title, description, uid, id;
+  final String start,end;
 
   @override
   _PlanDetailsState createState() => _PlanDetailsState();
@@ -24,6 +29,9 @@ class PlanDetails extends StatefulWidget {
 
 class _PlanDetailsState extends State<PlanDetails> {
   List<Modellocation> _resultsList = [];
+  String date = "";
+  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate2 = DateTime.now();
 
   fetchPlanLocationList() async {
     String title, desc, uid, id;
@@ -51,6 +59,38 @@ class _PlanDetailsState extends State<PlanDetails> {
     // TODO: implement initState
     fetchPlanLocationList();
     super.initState();
+    setState(() {
+      selectedDate= DateTime.parse(widget.start);
+      selectedDate2= DateTime.parse(widget.end);
+    });
+  }
+
+  _selectDateStart(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate)
+      setState(() {
+        selectedDate = selected;
+        updateStartDate(selectedDate.toString(), widget.id);
+      });
+  }
+
+  _selectDateEnd(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate2,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate2)
+      setState(() {
+        selectedDate2 = selected;
+        updateEndDate(selectedDate2.toString(), widget.id);
+      });
   }
 
   @override
@@ -104,7 +144,33 @@ class _PlanDetailsState extends State<PlanDetails> {
                                   //fontWeight: FontWeight.bold,
                                 ),
                               ),
+                            ), const SizedBox(height: 30,),
+                            const Text(
+                              'Schedule',
+                              style: TextStyle(
+                                  color: Colors.deepPurpleAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
                             ),
+
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _selectDateStart(context);
+                                });
+                              },
+                              child: Text("Choose Starting Date"),
+                            ),
+                            Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _selectDateEnd(context);
+                                });
+                              },
+                              child: Text("Choose End Date"),
+                            ),
+                            Text("${selectedDate2.day}/${selectedDate2.month}/${selectedDate2.year}")
                           ],
                         ),
                       )

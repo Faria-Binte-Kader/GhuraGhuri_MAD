@@ -22,7 +22,7 @@ class _PlanState extends State<Plan> {
   List<ModelPlan> planList = [];
 
   fetchPlanList() async {
-    String title, desc, uid, id;
+    String title, desc, uid, id, start, end;
 
     FirebaseFirestore.instance
         .collection('Plans')
@@ -34,8 +34,10 @@ class _PlanState extends State<Plan> {
         desc = plan["Description"];
         uid = plan["Uid"];
         id = plan["ID"];
+        start = plan["StartDate"];
+        end = plan["EndDate"];
         setState(() {
-          planList.add(ModelPlan(title, desc, uid, id));
+          planList.add(ModelPlan(title, desc, uid, id, start, end));
         });
       });
     });
@@ -112,7 +114,7 @@ class _PlanState extends State<Plan> {
                           child: GestureDetector(
                             onTap: () {},
                             child: const Icon(
-                              Icons.done,
+                              Icons.add,
                               color: Colors.deepPurpleAccent,
                             ),
                           ),
@@ -174,6 +176,8 @@ class _PlanState extends State<Plan> {
                             String description = planList[i].description;
                             String uid = planList[i].uid;
                             String id = planList[i].id;
+                            String s = planList[i].startdate;
+                            String e = planList[i].enddate;
                             log('pid: $id');
                             Navigator.push(
                                 context,
@@ -182,7 +186,9 @@ class _PlanState extends State<Plan> {
                                         title: title,
                                         description: description,
                                         uid: uid,
-                                        id: id)));
+                                        id: id,
+                                        start: s,
+                                        end: e)));
                           },
                           child: Card(
                             child: Padding(

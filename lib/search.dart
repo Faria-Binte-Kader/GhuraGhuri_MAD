@@ -90,7 +90,7 @@ class _SearchState extends State<Search> {
               ),
               Container(
                   child: ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: _resultsList.length,
                     itemBuilder: (BuildContext context, int index) => GestureDetector(
