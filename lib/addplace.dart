@@ -117,83 +117,85 @@ class _AddPlaceState extends State<AddPlace> {
     return StatefulBuilder(
         builder: (context, setState) {return AlertDialog(
       title: const Text('Add location'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            child: TextField(
-              controller: title,
-              keyboardType: TextInputType.multiline,
-              textInputAction: TextInputAction.newline,
-              minLines: 1,
-              maxLines: 2,
-              decoration: const InputDecoration(
-                hintText: 'Title',
-                hintStyle: TextStyle(fontSize: 18),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: TextField(
+                controller: title,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                minLines: 1,
+                maxLines: 2,
+                decoration: const InputDecoration(
+                  hintText: 'Title',
+                  hintStyle: TextStyle(fontSize: 18),
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 10, 0),
-            child: TextField(
-              controller: description,
-              keyboardType: TextInputType.multiline,
-              textInputAction: TextInputAction.newline,
-              minLines: 1,
-              maxLines: 5,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.edit),
-                hintText: 'Type details',
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 20, 10, 0),
+              child: TextField(
+                controller: description,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                minLines: 1,
+                maxLines: 5,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.edit),
+                  hintText: 'Type details',
+                ),
               ),
             ),
-          ),
-          Row(
-            children: [
-              const Text("Rating"),
-              const SizedBox(width: 20,),
-              DropdownButton(
-                value: dropdownvalue,
-                icon: const Icon(Icons.keyboard_arrow_down),
-                items: items.map((String items) {
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(items),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownvalue = newValue!;
-                  });
-                },
-              ),
-            ],
-          ),
-          Container(
-            child: load==true? Container(height:130,child: Image.file(_image)):const Text(""),
-          ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-                child: GestureDetector(
+            Row(
+              children: [
+                const Text("Rating"),
+                const SizedBox(width: 20,),
+                DropdownButton(
+                  value: dropdownvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                    });
+                  },
+                ),
+              ],
+            ),
+            Container(
+              child: load==true? Container(height:130,child: Image.file(_image)):const Text(""),
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                  child: GestureDetector(
+                    onTap:  () {
+                      setState((){
+                        getimage();
+                      });
+                    },
+                    child: const Icon(Icons.add_a_photo),
+                  ),
+                ),
+                GestureDetector(
                   onTap:  () {
                     setState((){
                       getimage();
                     });
                   },
-                  child: const Icon(Icons.add_a_photo),
-                ),
-              ),
-              GestureDetector(
-                onTap:  () {
-                  setState((){
-                    getimage();
-                  });
-                },
-                child: const Text("Add Photo"),),],),
-        ],
+                  child: const Text("Add Photo"),),],),
+          ],
+        ),
       ),
       actions: <Widget>[
         GestureDetector(
